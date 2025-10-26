@@ -4,7 +4,7 @@ type ContactRow = { label: string; value: string; icon: string; href?: string };
 
 const CONTACT_ROWS: ContactRow[] = [
   { label: 'Email', value: 'info@zentharatechnologies.com', icon: '@', href: 'mailto:info@zentharatechnologies.com' },
-  { label: 'Phone', value: '+91 730424511', icon: 'TEL' },
+  { label: 'Phone', value: '+91 7304245311', icon: 'TEL' },
   { label: 'Location', value: 'Mumbai, India', icon: 'GLB' }
 ];
 
