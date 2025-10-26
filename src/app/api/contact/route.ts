@@ -56,11 +56,11 @@ export async function POST(req: Request) {
     }
 
     const {
-      AWS_SES_REGION,
-      AWS_REGION,
-      AWS_ACCESS_KEY_ID,
-      AWS_SECRET_ACCESS_KEY,
-      AWS_SESSION_TOKEN,
+      SES_REGION,
+      DEFAULT_REGION,
+      SES_ACCESS_KEY_ID,
+      SES_SECRET_ACCESS_KEY,
+      SES_SESSION_TOKEN,
       CONTACT_RECIPIENT,
       CONTACT_FROM,
     } = process.env;
@@ -76,7 +76,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
     }
 
-    const region = AWS_SES_REGION ?? AWS_REGION;
+    const region = SES_REGION ?? DEFAULT_REGION;
     if (!region) {
       console.error('Missing AWS region for SES');
       return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
@@ -91,11 +91,11 @@ export async function POST(req: Request) {
     const sesClient = new SESClient({
       region,
       credentials:
-        AWS_ACCESS_KEY_ID && AWS_SECRET_ACCESS_KEY
+        SES_ACCESS_KEY_ID && SES_SECRET_ACCESS_KEY
           ? {
-              accessKeyId: AWS_ACCESS_KEY_ID,
-              secretAccessKey: AWS_SECRET_ACCESS_KEY,
-              sessionToken: AWS_SESSION_TOKEN,
+              accessKeyId: SES_ACCESS_KEY_ID,
+              secretAccessKey: SES_SECRET_ACCESS_KEY,
+              sessionToken: SES_SESSION_TOKEN,
             }
           : undefined,
     });
