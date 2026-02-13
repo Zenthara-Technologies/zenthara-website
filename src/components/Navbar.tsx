@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { openContactModal } from '@/components/ContactModal';
+import { Button } from '@/components/Button';
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -58,7 +59,7 @@ export function Navbar() {
           <Link href="/#services" className={active === 'services' ? 'active' : ''}>Services</Link>
           <Link href="/#process" className={active === 'process' ? 'active' : ''}>Process</Link>
           <Link href="/#about" className={active === 'about' ? 'active' : ''}>About</Link>
-          <button onClick={() => openContactModal()} className="btn btn-sm btn-primary" type="button">Contact</button>
+          <Button onClick={() => openContactModal()} size="sm" variant="primary">Contact</Button>
         </nav>
       </div>
 
@@ -69,16 +70,16 @@ export function Navbar() {
             <Link href="/#services" onClick={handleNavigate}>Services</Link>
             <Link href="/#process" onClick={handleNavigate}>Process</Link>
             <Link href="/#about" onClick={handleNavigate}>About</Link>
-            <button
+            <Button
               onClick={() => {
                 setOpen(false);
                 openContactModal();
               }}
-              className="btn btn-primary text-left"
-              type="button"
+              variant="primary"
+              className="w-full justify-start"
             >
               Contact
-            </button>
+            </Button>
           </div>
         </div>
       )}

@@ -22,8 +22,8 @@ Environment variables
 
 Configure these values to enable outbound contact emails via AWS SES:
 
-- `AWS_SES_REGION` (or `AWS_REGION`) - SES region (e.g. `us-east-1`)
-- `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY` - IAM user credentials with `ses:SendEmail`
-- `AWS_SESSION_TOKEN` - optional session token when using temporary creds
+- `SES_REGION` (or `DEFAULT_REGION`) - SES region (e.g. `us-east-1`)
+- `SES_ACCESS_KEY_ID` / `SES_SECRET_ACCESS_KEY` - IAM user credentials with `ses:SendEmail`
+- `SES_SESSION_TOKEN` - optional session token when using temporary creds
 - `CONTACT_RECIPIENT` - comma-separated recipient email addresses
 - `CONTACT_FROM` - verified SES identity used as the sender (defaults to the first recipient if omitted)

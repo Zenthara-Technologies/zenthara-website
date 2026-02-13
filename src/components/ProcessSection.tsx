@@ -23,20 +23,20 @@ export function ProcessSection() {
         </div>
 
         <div className="relative mt-10 flex-1">
-          <div className="absolute left-1/2 top-8 -translate-x-1/2 h-[calc(100%-4rem)] w-px bg-gradient-to-b from-indigo-200 via-indigo-100 to-transparent hidden lg:block" aria-hidden="true" />
+          <div className="absolute left-1/2 top-8 -translate-x-1/2 h-[calc(100%-4rem)] w-px bg-gradient-to-b from-brand-light/30 via-brand-light/10 to-transparent hidden lg:block" aria-hidden="true" />
           <div className="grid gap-6 lg:grid-cols-2">
             {steps.map((s, i) => (
               <div
                 key={s.title}
-                className="flex items-start gap-4 rounded-2xl bg-white/95 p-6 shadow-card ring-1 ring-black/5 animate-fade-up backdrop-blur tile-hover"
+                className="flex items-start gap-4 rounded-2xl bg-white/80 p-6 shadow-card ring-1 ring-white/20 animate-fade-up backdrop-blur tile-hover"
                 style={{ animationDelay: `${i * 80}ms` }}
               >
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-violet-600 text-white font-bold">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-dark to-brand text-white font-bold shadow-lg shadow-brand/20">
                   {s.num}
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900">{s.title}</h3>
-                  <p className="text-gray-600">{s.desc}</p>
+                  <h3 className="text-lg font-semibold text-slate-900">{s.title}</h3>
+                  <p className="text-slate-600">{s.desc}</p>
                 </div>
               </div>
             ))}
@@ -47,12 +47,12 @@ export function ProcessSection() {
           {highlights.map((item, i) => (
             <div
               key={item.label}
-              className="rounded-2xl border border-indigo-100 bg-white/90 p-5 shadow-sm backdrop-blur animate-fade-up tile-hover"
+              className="rounded-2xl border border-white/40 bg-white/60 p-5 shadow-sm backdrop-blur animate-fade-up tile-hover"
               style={{ animationDelay: `${(i + steps.length) * 70}ms` }}
             >
-              <div className="text-xs font-semibold uppercase tracking-widest text-indigo-500">{item.label}</div>
-              <div className="mt-1 text-2xl font-bold text-gray-900">{item.value}</div>
-              <p className="mt-2 text-sm text-gray-600">{item.detail}</p>
+              <div className="text-xs font-semibold uppercase tracking-widest text-brand">{item.label}</div>
+              <div className="mt-1 text-2xl font-bold text-slate-900">{item.value}</div>
+              <p className="mt-2 text-sm text-slate-600">{item.detail}</p>
             </div>
           ))}
         </div>

@@ -74,18 +74,18 @@ export function AboutMission() {
 
           {/* Right: copy + feature list */}
           <div className="lg:col-span-6">
-            <div className="mb-3 inline-flex rounded-full bg-indigo-100/70 px-4 py-1 text-sm font-semibold text-indigo-700">About Zenthara</div>
+            <div className="mb-3 inline-flex rounded-full bg-brand/10 px-4 py-1 text-sm font-semibold text-brand">About Zenthara</div>
             <h2 className="text-3xl sm:text-4xl font-bold">
-              Turning vision into <span className="text-indigo-600">high-performance software</span>
+              Turning vision into <span className="text-brand">high-performance software</span>
             </h2>
-            <p className="mt-3 text-gray-600 max-w-2xl">
+            <p className="mt-3 text-slate-600 max-w-2xl">
               Every great product starts with a vision, and we turn that vision into technology that works. We blend strategy, design, and engineering to build
               scalable systems that unlock real business value.
             </p>
 
-            <div className="mt-5 rounded-2xl bg-white p-5 shadow-card ring-1 ring-black/5">
+            <div className="mt-5 rounded-2xl bg-white/60 backdrop-blur-sm p-5 shadow-card ring-1 ring-white/20">
               <h3 className="font-semibold">Our Mission</h3>
-              <p className="mt-1 text-gray-600">
+              <p className="mt-1 text-slate-600">
                 To democratize access to cutting-edge technology by delivering reliable, world-class solutions that drive innovation, efficiency, and sustainable growth for every client we serve.
               </p>
             </div>
@@ -94,7 +94,7 @@ export function AboutMission() {
               {FEATURES.map((feature, index) => (
                 <div
                   key={feature.title}
-                  className="flex items-center gap-3 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-black/5 tile-hover-soft animate-fade-up"
+                  className="flex items-center gap-3 rounded-2xl bg-white/60 p-4 shadow-sm ring-1 ring-white/20 tile-hover-soft animate-fade-up backdrop-blur-sm"
                   style={{ animationDelay: `${index * 80}ms` }}
                 >
                   <div className={`flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br ${feature.accent} text-xl`}>

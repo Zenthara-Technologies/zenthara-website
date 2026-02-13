@@ -42,7 +42,12 @@ export function Button({ variant = 'primary', size = 'md', className, children, 
   }
   return (
     <button className={classes(variant, size, className)} {...(props as ButtonProps)}>
-      {children}
+      {variant === 'primary' && (
+        <span className="absolute inset-0 overflow-hidden rounded-lg">
+          <span className="absolute inset-0 rounded-lg bg-[image:linear-gradient(75deg,transparent_25%,rgba(255,255,255,0.3)_50%,transparent_75%)] opacity-0 transition-opacity duration-1000 group-hover:opacity-100 bg-[length:250%_250%,100%_100%] bg-no-repeat animate-[shimmer_2s_infinite]" />
+        </span>
+      )}
+      <span className="relative">{children}</span>
     </button>
   );
 }

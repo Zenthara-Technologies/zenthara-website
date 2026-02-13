@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 type Item = { icon: string; title: string; desc: string };
 type Category = { key: string; label: string; items: Item[] };
@@ -68,6 +69,31 @@ export function ServicesShowcase() {
   const [active, setActive] = useState<string>(CATEGORIES[0].key);
   const current = CATEGORIES.find((c) => c.key === active) ?? CATEGORIES[0];
   const rightRef = useRef<HTMLDivElement | null>(null);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  // Sync active tab with URL query param
+  useEffect(() => {
+    const category = searchParams.get('category');
+    if (category && CATEGORIES.some(c => c.key === category)) {
+      setActive(category);
+      // Force scroll to services section to ensure deep link visibility
+      // Small timeout to allow layout to stabilize
+      setTimeout(() => {
+        const section = document.getElementById('services');
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 500);
+    }
+  }, [searchParams]);
+
+  const handleTabClick = (key: string) => {
+    setActive(key);
+    // Use window.history to update URL without triggering a Next.js router navigation/scroll reset
+    const newUrl = `${window.location.pathname}?category=${key}#services`;
+    window.history.replaceState({ ...window.history.state, as: newUrl, url: newUrl }, '', newUrl);
+  };
 
   // When switching categories on small screens, ensure cards are visible
   useEffect(() => {
@@ -89,12 +115,12 @@ export function ServicesShowcase() {
                 type="button"
                 role="tab"
                 aria-selected={active === c.key}
-                onClick={() => setActive(c.key)}
+                onClick={() => handleTabClick(c.key)}
                 className={
                   'w-full text-left rounded-xl border px-4 py-3 font-semibold transition-all backdrop-blur shadow-sm ' +
                   (active === c.key
-                    ? 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white border-transparent shadow-md'
-                    : 'bg-white/80 border-gray-200 hover:border-indigo-200 hover:bg-white')
+                    ? 'bg-gradient-to-r from-brand-dark to-brand text-white border-transparent shadow-md'
+                    : 'bg-white/80 border-white/40 hover:border-brand-light/30 hover:bg-white')
                 }
               >
                 {c.label}
