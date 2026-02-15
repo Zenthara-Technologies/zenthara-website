@@ -23,12 +23,12 @@ const CONTACT_ROWS: ContactRow[] = [
 
 export function ContactInfoSection() {
   return (
-    <section className="section section-pad section-screen contact-surface relative overflow-hidden scroll-mt-16" aria-labelledby="get-in-touch">
+    <section id="contact" className="section section-pad section-screen contact-surface relative overflow-hidden scroll-mt-16" aria-labelledby="contact-heading">
       <span className="contact-veil contact-veil-1" aria-hidden="true" />
       <span className="contact-veil contact-veil-2" aria-hidden="true" />
       <span className="contact-veil contact-veil-3" aria-hidden="true" />
       <div className="container relative z-10">
-        <h2 id="get-in-touch" className="text-3xl sm:text-4xl font-bold text-center">Get In Touch</h2>
+        <h2 id="contact-heading" className="text-3xl sm:text-4xl font-bold text-center">Get In Touch</h2>
         <p className="mx-auto mt-3 max-w-3xl text-center text-gray-600">
           Ready to start your next project? Contact us to discuss how we can help bring your vision to life.
         </p>

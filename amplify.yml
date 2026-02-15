@@ -1,0 +1,24 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+        - rm -f .env.production && touch .env.production
+        - |
+          for var in CONTACT_RECIPIENT CONTACT_FROM DEFAULT_REGION SES_REGION SES_ACCESS_KEY_ID SES_SECRET_ACCESS_KEY CONTACT_TO SES_FROM_EMAIL AWS_REGION AWS_DEFAULT_REGION AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY SES_SESSION_TOKEN AWS_SESSION_TOKEN; do
+            value="$(printenv "$var")"
+            if [ -n "$value" ]; then
+              echo "$var=$value" >> .env.production
+            fi
+          done
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*

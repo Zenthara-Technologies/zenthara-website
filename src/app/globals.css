@@ -9,7 +9,7 @@
 
 html,
 body {
-  height: 100%;
+  /* height: 100%; - Removed to fix scroll anchoring */
 }
 
 body {
@@ -91,7 +91,7 @@ html {
 }
 
 .btn {
-  @apply inline-flex items-center justify-center rounded-lg px-6 py-3 font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-95;
+  @apply inline-flex items-center justify-center rounded-lg px-6 py-3 font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 active:scale-95;
 }
 
 .btn-primary {

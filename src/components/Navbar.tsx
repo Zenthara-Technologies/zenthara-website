@@ -15,7 +15,15 @@ export function Navbar() {
     setOpen(false);
   }, [pathname]);
 
-  const handleNavigate = () => setOpen(false);
+  const clearFocusedButton = () => {
+    const current = document.activeElement as HTMLElement | null;
+    if (current?.tagName === 'BUTTON') current.blur();
+  };
+
+  const handleNavigate = () => {
+    clearFocusedButton();
+    setOpen(false);
+  };
 
   // Scrollspy for in-page sections on home route
   useEffect(() => {
@@ -38,6 +46,27 @@ export function Navbar() {
     return () => io.disconnect();
   }, [pathname]);
 
+  useEffect(() => {
+    if (pathname !== '/') {
+      setActive('');
+      return;
+    }
+
+    const valid = new Set(['home', 'services', 'process', 'about']);
+    const syncFromHash = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (valid.has(hash)) {
+        setActive(hash);
+      } else if (!hash) {
+        setActive('home');
+      }
+    };
+
+    syncFromHash();
+    window.addEventListener('hashchange', syncFromHash);
+    return () => window.removeEventListener('hashchange', syncFromHash);
+  }, [pathname]);
+
   return (
     <header className="site-header">
       <div className="container flex h-16 items-center justify-between">
@@ -55,7 +84,12 @@ export function Navbar() {
           ☰
         </button>
         <nav className="site-nav" aria-label="Main">
-          <Link href="/" className={pathname === '/' && (!active || active === 'home') ? 'active' : ''}>Home</Link>
+          <Link
+            href="/"
+            className={pathname === '/' && (!active || active === 'home') ? 'active' : ''}
+          >
+            Home
+          </Link>
           <Link href="/#services" className={active === 'services' ? 'active' : ''}>Services</Link>
           <Link href="/#process" className={active === 'process' ? 'active' : ''}>Process</Link>
           <Link href="/#about" className={active === 'about' ? 'active' : ''}>About</Link>
@@ -66,7 +100,12 @@ export function Navbar() {
       {open && (
         <div className="md:hidden border-t border-gray-200 bg-white">
           <div className="container py-3 flex flex-col gap-3">
-            <Link href="/" onClick={handleNavigate}>Home</Link>
+            <Link
+              href="/"
+              onClick={handleNavigate}
+            >
+              Home
+            </Link>
             <Link href="/#services" onClick={handleNavigate}>Services</Link>
             <Link href="/#process" onClick={handleNavigate}>Process</Link>
             <Link href="/#about" onClick={handleNavigate}>About</Link>

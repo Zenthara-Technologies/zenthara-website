@@ -36,7 +36,7 @@ const FEATURES: Feature[] = [
 
 export function AboutMission() {
   return (
-    <section className="section section-alt section-screen relative overflow-hidden scroll-mt-16" id="about">
+    <section className="section section-alt section-screen pt-10 sm:pt-14 lg:pt-16 relative overflow-hidden scroll-mt-16" id="about">
       <span className="mission-blob mission-blob-1" aria-hidden="true" />
       <span className="mission-blob mission-blob-2" aria-hidden="true" />
       <span className="mission-blob mission-blob-3" aria-hidden="true" />

@@ -12,7 +12,7 @@ export function ProcessSection() {
   ];
 
   return (
-    <section className="section section-pad section-screen scroll-mt-16 relative overflow-hidden process-surface" id="process">
+    <section className="section py-12 sm:py-16 lg:py-20 section-screen scroll-mt-16 relative overflow-hidden process-surface" id="process">
       <span className="process-veil process-veil-1" aria-hidden="true" />
       <span className="process-veil process-veil-2" aria-hidden="true" />
       <span className="process-veil process-veil-3" aria-hidden="true" />
