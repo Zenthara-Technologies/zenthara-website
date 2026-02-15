@@ -7,11 +7,15 @@ type ContactState = {
     error?: string;
 };
 
+function pickEnv(...values: Array<string | undefined>) {
+    return values.find((value) => Boolean(value && value.trim()))?.trim();
+}
+
 function isValidEmail(email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-export async function sendContactEmail(prevState: ContactState, formData: FormData): Promise<ContactState> {
+export async function sendContactEmail(_prevState: ContactState, formData: FormData): Promise<ContactState> {
     const name = String(formData.get('name') ?? '').trim();
     const email = String(formData.get('email') ?? '').trim();
     const message = String(formData.get('message') ?? '').trim();
@@ -26,39 +30,48 @@ export async function sendContactEmail(prevState: ContactState, formData: FormDa
         return { error: 'Invalid email address.' };
     }
 
-    const {
-        SES_REGION,
-        DEFAULT_REGION,
-        SES_ACCESS_KEY_ID,
-        SES_SECRET_ACCESS_KEY,
-        SES_SESSION_TOKEN,
-        CONTACT_RECIPIENT,
-        CONTACT_FROM,
-    } = process.env;
-
-    if (!CONTACT_RECIPIENT) {
-        console.error('Missing CONTACT_RECIPIENT');
+    const recipientValue = pickEnv(process.env.CONTACT_RECIPIENT, process.env.CONTACT_TO);
+    if (!recipientValue) {
+        console.error('Missing contact recipient configuration. Set CONTACT_RECIPIENT or CONTACT_TO.');
         return { error: 'Server configuration error.' };
     }
 
-    const to = CONTACT_RECIPIENT.split(',').map((e) => e.trim()).filter(Boolean);
-    const region = SES_REGION ?? DEFAULT_REGION;
-    const from = CONTACT_FROM ?? to[0];
-
-    if (!region || !from) {
-        console.error('Missing SES configuration');
+    const to = recipientValue.split(',').map((entry) => entry.trim()).filter(Boolean);
+    if (to.length === 0) {
+        console.error('Contact recipient configuration is empty after parsing.');
         return { error: 'Server configuration error.' };
     }
+
+    const region = pickEnv(
+        process.env.SES_REGION,
+        process.env.AWS_REGION,
+        process.env.AWS_DEFAULT_REGION,
+        process.env.DEFAULT_REGION,
+    );
+    if (!region) {
+        console.error('Missing SES region. Set SES_REGION, AWS_REGION, AWS_DEFAULT_REGION, or DEFAULT_REGION.');
+        return { error: 'Server configuration error.' };
+    }
+
+    const from = pickEnv(process.env.CONTACT_FROM, process.env.SES_FROM_EMAIL, to[0]);
+    if (!from) {
+        console.error('Missing contact sender configuration. Set CONTACT_FROM or SES_FROM_EMAIL.');
+        return { error: 'Server configuration error.' };
+    }
+
+    const accessKeyId = pickEnv(process.env.SES_ACCESS_KEY_ID, process.env.AWS_ACCESS_KEY_ID);
+    const secretAccessKey = pickEnv(process.env.SES_SECRET_ACCESS_KEY, process.env.AWS_SECRET_ACCESS_KEY);
+    const sessionToken = pickEnv(process.env.SES_SESSION_TOKEN, process.env.AWS_SESSION_TOKEN);
 
     try {
         const sesClient = new SESClient({
             region,
             credentials:
-                SES_ACCESS_KEY_ID && SES_SECRET_ACCESS_KEY
+                accessKeyId && secretAccessKey
                     ? {
-                        accessKeyId: SES_ACCESS_KEY_ID,
-                        secretAccessKey: SES_SECRET_ACCESS_KEY,
-                        sessionToken: SES_SESSION_TOKEN,
+                        accessKeyId,
+                        secretAccessKey,
+                        sessionToken,
                     }
                     : undefined,
         });
