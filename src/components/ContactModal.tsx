@@ -41,13 +41,13 @@ export function ContactModalProvider() {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setOpen(false)} />
       {/* Container becomes a flex column with a scrollable content area on small screens */}
-      <div className="relative z-10 w-full sm:max-w-3xl rounded-3xl sm:rounded-2xl bg-white p-0 shadow-2xl ring-1 ring-black/10 animate-fade-up max-h-[92vh] flex flex-col">
-        <div className="px-6 py-5 border-b border-gray-100 flex items-start justify-between rounded-t-3xl">
+      <div className="relative z-10 w-full sm:max-w-3xl rounded-3xl sm:rounded-2xl bg-white dark:bg-dark-800 p-0 shadow-2xl ring-1 ring-black/10 dark:ring-white/10 animate-fade-up max-h-[92vh] flex flex-col">
+        <div className="px-6 py-5 border-b border-gray-100 dark:border-white/10 flex items-start justify-between rounded-t-3xl">
           <div>
-            <h3 className="text-2xl sm:text-3xl font-bold">Let{`'`}s Get Started</h3>
-            <p className="text-gray-600">Tell us about your project and we{`'`}ll get back to you within 24 hours.</p>
+            <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">Let{`'`}s Get Started</h3>
+            <p className="text-gray-600 dark:text-slate-400">Tell us about your project and we{`'`}ll get back to you within 24 hours.</p>
           </div>
-          <button aria-label="Close" className="text-2xl leading-none" onClick={() => setOpen(false)}>
+          <button aria-label="Close" className="text-2xl leading-none text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white" onClick={() => setOpen(false)}>
             <span aria-hidden="true">&times;</span>
           </button>
         </div>

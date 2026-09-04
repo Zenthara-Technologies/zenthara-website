@@ -12,14 +12,15 @@ export function ProcessSection() {
   ];
 
   return (
-    <section className="section py-12 sm:py-16 lg:py-20 section-screen scroll-mt-16 relative overflow-hidden process-surface" id="process">
+    <section className="section py-12 sm:py-16 lg:py-20 scroll-mt-24 relative overflow-hidden process-surface" id="process">
       <span className="process-veil process-veil-1" aria-hidden="true" />
       <span className="process-veil process-veil-2" aria-hidden="true" />
       <span className="process-veil process-veil-3" aria-hidden="true" />
       <div className="container relative z-10 flex h-full flex-col">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-3xl mx-auto text-center" data-reveal>
+          <div className="section-kicker">How We Work</div>
           <h2 className="section-title text-center">Think. Build. Deliver.</h2>
-          <p className="text-gray-600">A pragmatic, results-driven process that keeps momentum high and risk low.</p>
+          <p className="text-gray-600 dark:text-slate-400">A pragmatic, results-driven process that keeps momentum high and risk low.</p>
         </div>
 
         <div className="relative mt-10 flex-1">
@@ -28,15 +29,16 @@ export function ProcessSection() {
             {steps.map((s, i) => (
               <div
                 key={s.title}
-                className="flex items-start gap-4 rounded-2xl bg-white/80 p-6 shadow-card ring-1 ring-white/20 animate-fade-up backdrop-blur tile-hover"
-                style={{ animationDelay: `${i * 80}ms` }}
+                data-reveal
+                data-reveal-delay={Math.min(i + 1, 4)}
+                className="flex items-start gap-4 rounded-2xl bg-white/80 p-6 shadow-card ring-1 ring-white/20 backdrop-blur tile-hover dark:bg-dark-800/80 dark:ring-white/10"
               >
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-dark to-brand text-white font-bold shadow-lg shadow-brand/20">
                   {s.num}
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-slate-900">{s.title}</h3>
-                  <p className="text-slate-600">{s.desc}</p>
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{s.title}</h3>
+                  <p className="text-slate-600 dark:text-slate-400">{s.desc}</p>
                 </div>
               </div>
             ))}
@@ -47,12 +49,13 @@ export function ProcessSection() {
           {highlights.map((item, i) => (
             <div
               key={item.label}
-              className="rounded-2xl border border-white/40 bg-white/60 p-5 shadow-sm backdrop-blur animate-fade-up tile-hover"
-              style={{ animationDelay: `${(i + steps.length) * 70}ms` }}
+              data-reveal
+              data-reveal-delay={Math.min(i + 1, 4)}
+              className="rounded-2xl border border-white/40 bg-white/60 p-5 shadow-sm backdrop-blur tile-hover dark:border-white/10 dark:bg-dark-800/60"
             >
-              <div className="text-xs font-semibold uppercase tracking-widest text-brand">{item.label}</div>
-              <div className="mt-1 text-2xl font-bold text-slate-900">{item.value}</div>
-              <p className="mt-2 text-sm text-slate-600">{item.detail}</p>
+              <div className="text-xs font-semibold uppercase tracking-widest text-brand dark:text-brand-light">{item.label}</div>
+              <div className="mt-1 text-2xl font-bold text-slate-900 dark:text-white">{item.value}</div>
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{item.detail}</p>
             </div>
           ))}
         </div>

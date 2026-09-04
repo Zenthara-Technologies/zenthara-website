@@ -25,32 +25,34 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="container section-pad space-y-12">
+    <div className="container section-pad space-y-16">
       <div className="max-w-3xl">
-        <h1 className="text-3xl sm:text-4xl font-bold">About Zenthara</h1>
-        <h2 className="mt-4 text-2xl font-semibold text-indigo-600">Turning Vision Into High-Performance Software</h2>
-        <p className="mt-4 text-gray-600">
-          Every great product starts with a vision - and at Zenthara, we turn that vision into technology that works. Founded on the belief that
-          innovation should be both accessible and impactful, we help businesses build scalable, high-quality digital solutions designed for the future.
+        <div className="section-kicker !mx-0">About Zenthara</div>
+        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-900 dark:text-white">
+          Turning vision into <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand to-brand-dark dark:from-brand-light dark:to-accent-emerald">high-performance software</span>
+        </h1>
+        <p className="mt-5 text-lg text-gray-600 dark:text-slate-400 leading-relaxed">
+          Every great product starts with a vision — we turn that vision into technology that works. We believe innovation should be both accessible and
+          impactful, so we help businesses build scalable, high-quality digital solutions designed for the future.
         </p>
-        <p className="mt-4 text-gray-600">
+        <p className="mt-4 text-gray-600 dark:text-slate-400 leading-relaxed">
           By blending strategic thinking, modern design, and robust engineering, we transform complex challenges into elegant, dependable systems. Whether
-          you are nurturing a new idea or modernizing an existing platform, we focus on outcomes that create real business value.
+          you&apos;re nurturing a new idea or modernizing an existing platform, we focus on outcomes that create real business value.
         </p>
       </div>
 
-      <div className="grid gap-8 sm:grid-cols-2">
-        <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm tile-hover">
-          <h3 className="text-xl font-semibold">Our Mission</h3>
-          <p className="mt-3 text-gray-700">
+      <div className="grid gap-6 sm:grid-cols-2">
+        <div className="card !p-7">
+          <h3 className="text-xl font-semibold text-slate-900 dark:text-white">Our Mission</h3>
+          <p className="mt-3 text-gray-700 dark:text-slate-400 leading-relaxed">
             To democratize access to cutting-edge technology by delivering reliable, world-class solutions that drive innovation, efficiency, and
             sustainable growth for every client we serve.
           </p>
         </div>
 
-        <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm tile-hover">
-          <h3 className="text-xl font-semibold">Think. Build. Deliver.</h3>
-          <p className="mt-3 text-gray-700">
+        <div className="card !p-7">
+          <h3 className="text-xl font-semibold text-slate-900 dark:text-white">Think. Build. Deliver.</h3>
+          <p className="mt-3 text-gray-700 dark:text-slate-400 leading-relaxed">
             We build long-term partnerships, aligning our multidisciplinary team with your roadmap. From discovery through delivery, we remain accountable
             to the outcomes that matter most to your business.
           </p>
@@ -58,15 +60,15 @@ export default function AboutPage() {
       </div>
 
       <div>
-        <h3 className="text-2xl font-semibold">Our Values</h3>
-        <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <h3 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Our Values</h3>
+        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {values.map((value) => (
             <div
               key={value.title}
-              className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm tile-hover"
+              className="rounded-2xl border border-gray-100 bg-white p-6 shadow-card tile-hover dark:border-white/10 dark:bg-dark-800"
             >
-              <div className="text-sm font-semibold text-indigo-600 uppercase tracking-wide">{value.title}</div>
-              <p className="mt-3 text-gray-700 text-sm leading-relaxed">{value.description}</p>
+              <div className="text-xs font-semibold text-brand dark:text-brand-light uppercase tracking-widest">{value.title}</div>
+              <p className="mt-3 text-gray-700 dark:text-slate-400 text-sm leading-relaxed">{value.description}</p>
             </div>
           ))}
         </div>

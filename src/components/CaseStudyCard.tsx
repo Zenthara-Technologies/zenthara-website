@@ -4,31 +4,30 @@ type Props = {
   title: string;
   excerpt: string;
   href: string;
+  category: string;
+  status: string;
   tags?: string[];
-  year?: number;
-  variant?: 'case-1' | 'case-2' | 'case-3';
 };
 
-export function CaseStudyCard({ title, excerpt, href, tags, year, variant = 'case-1' }: Props) {
-  const variantClass = variant === 'case-2' ? 'case-2' : variant === 'case-3' ? 'case-3' : '';
+export function CaseStudyCard({ title, excerpt, href, category, status, tags }: Props) {
   return (
-    <article className="card case-card">
-      <div className={`case-thumb ${variantClass}`} role="img" aria-label={title}></div>
-      <div className="case-body mt-4">
-        <div className="flex items-center justify-between">
-          <h3 className="text-xl font-semibold">{title}</h3>
-          {year ? <span className="text-sm text-gray-500">{year}</span> : null}
+    <Link href={href} className="card case-card group flex flex-col">
+      <span className="inline-flex w-fit items-center rounded-full bg-brand/10 dark:bg-brand-light/10 px-3 py-1 text-xs font-semibold text-brand-dark dark:text-brand-light">
+        {category}
+      </span>
+      <h3 className="mt-4 text-lg font-semibold text-slate-900 dark:text-white group-hover:text-brand dark:group-hover:text-brand-light transition-colors">{title}</h3>
+      <p className="mt-2 flex-1 text-sm text-gray-600 dark:text-slate-400 leading-relaxed">{excerpt}</p>
+      {tags && tags.length > 0 && (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {tags.slice(0, 3).map((t) => (
+            <span key={t} className="rounded-full bg-slate-100 px-2.5 py-1 text-xs text-gray-700 ring-1 ring-inset ring-black/5 dark:bg-white/10 dark:text-slate-300 dark:ring-white/10">{t}</span>
+          ))}
         </div>
-        <p className="mt-2 text-gray-600">{excerpt}</p>
-        {tags && tags.length > 0 && (
-          <div className="mt-3 flex flex-wrap gap-2">
-            {tags.slice(0, 4).map((t) => (
-              <span key={t} className="rounded-full bg-slate-100 px-2.5 py-1 text-xs text-gray-700 ring-1 ring-inset ring-black/5">{t}</span>
-            ))}
-          </div>
-        )}
-        <Link href={href} className="btn btn-link mt-2">Read more →</Link>
+      )}
+      <div className="mt-4 flex items-center justify-between border-t border-slate-100 dark:border-white/10 pt-3">
+        <span className="text-xs font-medium text-gray-500 dark:text-slate-500">{status}</span>
+        <span className="btn btn-link text-sm">Read case study →</span>
       </div>
-    </article>
+    </Link>
   );
 }

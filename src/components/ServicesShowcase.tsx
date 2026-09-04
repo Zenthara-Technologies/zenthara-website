@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 type Item = { icon: string; title: string; desc: string };
 type Category = { key: string; label: string; items: Item[] };
@@ -70,33 +70,27 @@ export function ServicesShowcase() {
   const current = CATEGORIES.find((c) => c.key === active) ?? CATEGORIES[0];
   const rightRef = useRef<HTMLDivElement | null>(null);
   const searchParams = useSearchParams();
-  const router = useRouter();
 
-  // Sync active tab with URL query param
+  // Pick up an initial category from a deep link (e.g. a footer link with
+  // ?category=cloud). HashScrollCleanup takes care of scrolling into view
+  // and then stripping the query/hash back off the URL.
   useEffect(() => {
     const category = searchParams.get('category');
-    if (category && CATEGORIES.some(c => c.key === category)) {
+    if (category && CATEGORIES.some((c) => c.key === category)) {
       setActive(category);
-      // Force scroll to services section to ensure deep link visibility
-      // Small timeout to allow layout to stabilize
-      setTimeout(() => {
-        const section = document.getElementById('services');
-        if (section) {
-          section.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 500);
     }
-  }, [searchParams]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleTabClick = (key: string) => {
     setActive(key);
-    // Use window.history to update URL without triggering a Next.js router navigation/scroll reset
-    const newUrl = `${window.location.pathname}?category=${key}#services`;
-    window.history.replaceState({ ...window.history.state, as: newUrl, url: newUrl }, '', newUrl);
   };
 
   // When switching categories on small screens, ensure cards are visible
+  const prevActive = useRef(active);
   useEffect(() => {
+    if (prevActive.current === active) return;
+    prevActive.current = active;
     if (!rightRef.current) return;
     if (window.matchMedia('(max-width: 1023px)').matches) {
       rightRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -108,7 +102,11 @@ export function ServicesShowcase() {
       <div className="flex flex-col gap-8 lg:grid lg:grid-cols-12">
         {/* Left: Tabs */}
         <div className="lg:col-span-4">
-          <div className="space-y-3 sticky top-24" role="tablist" aria-orientation="vertical">
+          <div
+            className="flex gap-2 overflow-x-auto pb-2 lg:sticky lg:top-24 lg:flex-col lg:gap-2 lg:overflow-visible lg:pb-0"
+            role="tablist"
+            aria-orientation="vertical"
+          >
             {CATEGORIES.map((c) => (
               <button
                 key={c.key}
@@ -117,10 +115,10 @@ export function ServicesShowcase() {
                 aria-selected={active === c.key}
                 onClick={() => handleTabClick(c.key)}
                 className={
-                  'w-full text-left rounded-xl border px-4 py-3 font-semibold transition-all backdrop-blur shadow-sm ' +
+                  'shrink-0 rounded-xl border px-4 py-3 text-left font-semibold transition-all backdrop-blur ' +
                   (active === c.key
-                    ? 'bg-gradient-to-r from-brand-dark to-brand text-white border-transparent shadow-md'
-                    : 'bg-white/80 border-white/40 hover:border-brand-light/30 hover:bg-white')
+                    ? 'border-transparent bg-gradient-to-r from-brand-dark to-brand text-white shadow-lg shadow-brand/20'
+                    : 'border-white/60 bg-white/70 text-slate-600 shadow-sm hover:border-brand-light/40 hover:bg-white hover:text-slate-900 dark:border-white/10 dark:bg-dark-800/70 dark:text-slate-300 dark:hover:bg-dark-800 dark:hover:text-white')
                 }
               >
                 {c.label}
@@ -131,22 +129,18 @@ export function ServicesShowcase() {
 
         {/* Right: Cards */}
         <div className="lg:col-span-8" ref={rightRef}>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-5 md:grid-cols-2">
             {current.items.map((item, i) => (
               <div
                 key={item.title}
-                className="group rounded-2xl border border-gray-100 bg-white/90 p-6 shadow-card backdrop-blur animate-fade-up tile-hover transition-[border-color] duration-200 hover:border-indigo-200"
+                className="group rounded-2xl border border-gray-100 bg-white/90 p-6 shadow-card backdrop-blur animate-fade-up tile-hover transition-[border-color] duration-200 hover:border-indigo-200 dark:border-white/10 dark:bg-dark-800/70 dark:hover:border-brand-light/30"
                 style={{ animationDelay: `${i * 90}ms` }}
               >
-                <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-50 to-violet-50 text-2xl ring-1 ring-black/5">
-                    <span aria-hidden>{item.icon}</span>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold group-hover:text-indigo-700 transition-colors">{item.title}</h3>
-                    <p className="mt-1 text-gray-600">{item.desc}</p>
-                  </div>
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand to-brand-dark text-2xl shadow-md shadow-brand/20">
+                  <span aria-hidden className="drop-shadow-sm">{item.icon}</span>
                 </div>
+                <h3 className="mt-4 text-lg font-semibold text-slate-900 dark:text-white group-hover:text-brand-dark dark:group-hover:text-brand-light transition-colors">{item.title}</h3>
+                <p className="mt-1.5 text-gray-600 dark:text-slate-400 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>

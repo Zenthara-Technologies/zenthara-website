@@ -5,6 +5,11 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { openContactModal } from '@/components/ContactModal';
 import { Button } from '@/components/Button';
+import { LogoMark } from '@/components/Logo';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { SectionLink } from '@/components/SectionLink';
+
+const SECTION_IDS = ['home', 'services', 'process', 'about'];
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -28,8 +33,7 @@ export function Navbar() {
   // Scrollspy for in-page sections on home route
   useEffect(() => {
     if (pathname !== '/') return;
-    const ids = ['home', 'services', 'process', 'about'];
-    const els = ids
+    const els = SECTION_IDS
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => Boolean(el));
 
@@ -47,75 +51,60 @@ export function Navbar() {
   }, [pathname]);
 
   useEffect(() => {
-    if (pathname !== '/') {
-      setActive('');
-      return;
-    }
-
-    const valid = new Set(['home', 'services', 'process', 'about']);
-    const syncFromHash = () => {
-      const hash = window.location.hash.replace('#', '');
-      if (valid.has(hash)) {
-        setActive(hash);
-      } else if (!hash) {
-        setActive('home');
-      }
-    };
-
-    syncFromHash();
-    window.addEventListener('hashchange', syncFromHash);
-    return () => window.removeEventListener('hashchange', syncFromHash);
+    if (pathname !== '/') setActive('');
   }, [pathname]);
 
   return (
     <header className="site-header">
-      <div className="container flex h-16 items-center justify-between">
-        <Link className="logo" href="/" aria-label="Zenthara Home">
-          <span className="logo-mark" aria-hidden>⚡</span>
-          <span className="logo-text">Zenthara</span>
-        </Link>
-        <button
-          className="nav-toggle"
-          aria-label="Toggle navigation"
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-          type="button"
-        >
-          ☰
-        </button>
-        <nav className="site-nav" aria-label="Main">
-          <Link
-            href="/"
-            className={pathname === '/' && (!active || active === 'home') ? 'active' : ''}
-          >
-            Home
+      <div className="container">
+        <div className="site-header-inner">
+          <Link className="logo" href="/" aria-label="Zenthara Home">
+            <LogoMark className="logo-mark" />
+            <span className="logo-text">Zenthara</span>
           </Link>
-          <Link href="/#services" className={active === 'services' ? 'active' : ''}>Services</Link>
-          <Link href="/#process" className={active === 'process' ? 'active' : ''}>Process</Link>
-          <Link href="/#about" className={active === 'about' ? 'active' : ''}>About</Link>
-          <Button onClick={() => openContactModal()} size="sm" variant="primary">Contact</Button>
-        </nav>
+          <div className="flex items-center gap-1 md:hidden">
+            <ThemeToggle />
+            <button
+              className="nav-toggle"
+              aria-label="Toggle navigation"
+              aria-expanded={open}
+              onClick={() => setOpen((v) => !v)}
+              type="button"
+            >
+              {open ? '✕' : '☰'}
+            </button>
+          </div>
+          <nav className="site-nav" aria-label="Main">
+            <SectionLink id="home" href="/" className={pathname === '/' && (!active || active === 'home') ? 'active' : ''}>
+              Home
+            </SectionLink>
+            <SectionLink id="services" href="/#services" className={active === 'services' ? 'active' : ''}>Services</SectionLink>
+            <SectionLink id="process" href="/#process" className={active === 'process' ? 'active' : ''}>Process</SectionLink>
+            <SectionLink id="about" href="/#about" className={active === 'about' ? 'active' : ''}>About</SectionLink>
+            <Link href="/portfolio" className={pathname.startsWith('/portfolio') ? 'active' : ''}>Work</Link>
+            <ThemeToggle className="ml-1" />
+            <Button onClick={() => openContactModal()} size="sm" variant="primary" className="ml-1">Contact</Button>
+          </nav>
+        </div>
       </div>
 
       {open && (
-        <div className="md:hidden border-t border-gray-200 bg-white">
-          <div className="container py-3 flex flex-col gap-3">
-            <Link
-              href="/"
-              onClick={handleNavigate}
-            >
+        <div className="container md:hidden">
+          <div className="mt-2 flex flex-col gap-1 rounded-2xl border border-white/40 bg-white/90 p-3 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-dark-900/95">
+            <SectionLink id="home" href="/" className="rounded-lg px-3 py-2.5 font-medium text-slate-700 hover:bg-slate-900/5 dark:text-slate-200 dark:hover:bg-white/10" onNavigate={handleNavigate}>
               Home
-            </Link>
-            <Link href="/#services" onClick={handleNavigate}>Services</Link>
-            <Link href="/#process" onClick={handleNavigate}>Process</Link>
-            <Link href="/#about" onClick={handleNavigate}>About</Link>
+            </SectionLink>
+            <SectionLink id="services" href="/#services" className="rounded-lg px-3 py-2.5 font-medium text-slate-700 hover:bg-slate-900/5 dark:text-slate-200 dark:hover:bg-white/10" onNavigate={handleNavigate}>Services</SectionLink>
+            <SectionLink id="process" href="/#process" className="rounded-lg px-3 py-2.5 font-medium text-slate-700 hover:bg-slate-900/5 dark:text-slate-200 dark:hover:bg-white/10" onNavigate={handleNavigate}>Process</SectionLink>
+            <SectionLink id="about" href="/#about" className="rounded-lg px-3 py-2.5 font-medium text-slate-700 hover:bg-slate-900/5 dark:text-slate-200 dark:hover:bg-white/10" onNavigate={handleNavigate}>About</SectionLink>
+            <Link href="/portfolio" className="rounded-lg px-3 py-2.5 font-medium text-slate-700 hover:bg-slate-900/5 dark:text-slate-200 dark:hover:bg-white/10" onClick={handleNavigate}>Work</Link>
             <Button
               onClick={() => {
                 setOpen(false);
                 openContactModal();
               }}
               variant="primary"
-              className="w-full justify-start"
+              className="mt-1 w-full justify-center"
             >
               Contact
             </Button>

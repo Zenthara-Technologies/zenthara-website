@@ -1,11 +1,13 @@
 import Link from 'next/link';
+import { LogoMark } from '@/components/Logo';
+import { SectionLink } from '@/components/SectionLink';
 
 export function Footer() {
   return (
     <footer className="site-footer">
       <div className="container footer-grid">
-        <div className="space-y-4">
-          <div className="logo footer-logo"><span className="logo-mark">⚡</span>Zenthara</div>
+        <div className="space-y-4 sm:col-span-2 lg:col-span-1">
+          <div className="logo footer-logo"><LogoMark className="logo-mark" />Zenthara</div>
           <p className="muted max-w-xs">End‑to‑end cloud, web, and data solutions for modern businesses.</p>
           <div className="flex gap-4">
             <a href="https://www.linkedin.com" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors" aria-label="LinkedIn">
@@ -20,8 +22,9 @@ export function Footer() {
           <h4 className="font-semibold mb-3 text-slate-100">Company</h4>
           <ul className="space-y-2 text-slate-300">
             <li><Link href="/" className="hover:text-brand-light transition-colors">Home</Link></li>
-            <li><Link href="/#about" className="hover:text-brand-light transition-colors">About Us</Link></li>
-            <li><Link href="/#process" className="hover:text-brand-light transition-colors">Our Process</Link></li>
+            <li><SectionLink id="about" href="/#about" className="hover:text-brand-light transition-colors">About Us</SectionLink></li>
+            <li><SectionLink id="process" href="/#process" className="hover:text-brand-light transition-colors">Our Process</SectionLink></li>
+            <li><Link href="/portfolio" className="hover:text-brand-light transition-colors">Portfolio</Link></li>
           </ul>
         </div>
         <div className="sm:col-span-2 lg:col-span-1">
@@ -29,9 +32,9 @@ export function Footer() {
           <ul className="space-y-2 text-slate-300">
             <li><Link href="/?category=cloud#services" className="hover:text-brand-light transition-colors">Cloud Solutions</Link></li>
             <li><Link href="/?category=consulting#services" className="hover:text-brand-light transition-colors">AWS Consulting</Link></li>
-            <li><Link href="/?category=ai" className="hover:text-brand-light transition-colors">AWS AI Services</Link></li>
-            <li><Link href="/?category=software" className="hover:text-brand-light transition-colors">Software Development</Link></li>
-            <li><Link href="/?category=mobile" className="hover:text-brand-light transition-colors">Mobile Applications</Link></li>
+            <li><Link href="/?category=ai#services" className="hover:text-brand-light transition-colors">AWS AI Services</Link></li>
+            <li><Link href="/?category=software#services" className="hover:text-brand-light transition-colors">Software Development</Link></li>
+            <li><Link href="/?category=mobile#services" className="hover:text-brand-light transition-colors">Mobile Applications</Link></li>
           </ul>
         </div>
         <div>
@@ -45,8 +48,8 @@ export function Footer() {
       <div className="container footer-bottom">
         <span>© <span id="year">{new Date().getFullYear()}</span> Zenthara. All rights reserved.</span>
         <div className="footer-links flex gap-4">
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
+          <span className="cursor-default opacity-70">Privacy</span>
+          <span className="cursor-default opacity-70">Terms</span>
         </div>
       </div>
     </footer>
