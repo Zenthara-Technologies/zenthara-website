@@ -20,6 +20,7 @@ const config: Config = {
           cyan: '#06B6D4',    // Cyan-500
           teal: '#14B8A6',    // Teal-500
           pink: '#EC4899',    // Pink-500
+          emerald: '#10B981', // Emerald-500
         },
         dark: {
           900: '#0F172A',     // Slate-900 (Deep Background)
