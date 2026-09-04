@@ -118,7 +118,7 @@ export function ServicesShowcase() {
                   'shrink-0 rounded-xl border px-4 py-3 text-left font-semibold transition-all backdrop-blur ' +
                   (active === c.key
                     ? 'border-transparent bg-gradient-to-r from-brand-dark to-brand text-white shadow-lg shadow-brand/20'
-                    : 'border-white/60 bg-white/70 text-slate-600 shadow-sm hover:border-brand-light/40 hover:bg-white hover:text-slate-900 dark:border-white/10 dark:bg-dark-800/70 dark:text-slate-300 dark:hover:bg-dark-800 dark:hover:text-white')
+                    : 'border-slate-200/80 bg-white/95 text-slate-600 shadow-sm hover:border-brand-light/40 hover:bg-white hover:text-slate-900 dark:border-white/10 dark:bg-dark-800/70 dark:text-slate-300 dark:hover:bg-dark-800 dark:hover:text-white')
                 }
               >
                 {c.label}

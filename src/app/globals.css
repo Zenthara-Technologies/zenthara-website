@@ -108,7 +108,7 @@ html {
 }
 
 .card {
-  @apply rounded-2xl border border-white/40 bg-white/70 backdrop-blur-md shadow-card p-8 transition-all duration-300 dark:border-white/10 dark:bg-dark-800/70;
+  @apply rounded-2xl border border-slate-200/80 bg-white/95 backdrop-blur-md shadow-card p-8 transition-all duration-300 dark:border-white/10 dark:bg-dark-800/70;
 }
 
 .card:hover {
@@ -174,7 +174,7 @@ html {
 }
 
 .hero-stat {
-  @apply rounded-2xl border border-white/50 bg-white/50 px-4 py-5 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-white/5;
+  @apply rounded-2xl border border-slate-200/80 bg-white/95 px-4 py-5 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-white/5;
 }
 
 .hero-stat-value {
@@ -195,7 +195,7 @@ html {
 }
 
 .site-header-inner {
-  @apply mx-auto mt-3 flex h-14 max-w-6xl items-center justify-between rounded-2xl border border-white/40 bg-white/70 px-4 shadow-[0_4px_24px_rgba(15,23,42,0.06)] backdrop-blur-xl transition-all duration-300 sm:px-6 dark:border-white/10 dark:bg-dark-900/70 dark:shadow-[0_4px_24px_rgba(0,0,0,0.3)];
+  @apply mx-auto mt-3 flex h-14 max-w-6xl items-center justify-between rounded-2xl border border-slate-200/80 bg-white/95 px-4 shadow-[0_4px_24px_rgba(15,23,42,0.08)] backdrop-blur-xl transition-all duration-300 sm:px-6 dark:border-white/10 dark:bg-dark-900/70 dark:shadow-[0_4px_24px_rgba(0,0,0,0.3)];
 }
 
 .logo {

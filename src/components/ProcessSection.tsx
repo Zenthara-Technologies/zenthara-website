@@ -31,7 +31,7 @@ export function ProcessSection() {
                 key={s.title}
                 data-reveal
                 data-reveal-delay={Math.min(i + 1, 4)}
-                className="flex items-start gap-4 rounded-2xl bg-white/80 p-6 shadow-card ring-1 ring-white/20 backdrop-blur tile-hover dark:bg-dark-800/80 dark:ring-white/10"
+                className="flex items-start gap-4 rounded-2xl bg-white/95 p-6 shadow-card ring-1 ring-slate-200/80 backdrop-blur tile-hover dark:bg-dark-800/80 dark:ring-white/10"
               >
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-dark to-brand text-white font-bold shadow-lg shadow-brand/20">
                   {s.num}
@@ -51,7 +51,7 @@ export function ProcessSection() {
               key={item.label}
               data-reveal
               data-reveal-delay={Math.min(i + 1, 4)}
-              className="rounded-2xl border border-white/40 bg-white/60 p-5 shadow-sm backdrop-blur tile-hover dark:border-white/10 dark:bg-dark-800/60"
+              className="rounded-2xl border border-slate-200/80 bg-white/90 p-5 shadow-sm backdrop-blur tile-hover dark:border-white/10 dark:bg-dark-800/60"
             >
               <div className="text-xs font-semibold uppercase tracking-widest text-brand dark:text-brand-light">{item.label}</div>
               <div className="mt-1 text-2xl font-bold text-slate-900 dark:text-white">{item.value}</div>

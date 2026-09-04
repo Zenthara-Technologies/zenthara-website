@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
+  darkMode: 'class',
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -11,27 +12,26 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          DEFAULT: '#8B5CF6', // Violet-500
-          dark: '#7C3AED',    // Violet-600
-          light: '#A78BFA',   // Violet-400
-          glow: '#C4B5FD',    // Violet-300
+          DEFAULT: '#6366F1', // Indigo-500
+          dark: '#4F46E5',    // Indigo-600
+          light: '#818CF8',   // Indigo-400
+          glow: '#A5B4FC',    // Indigo-300
         },
         accent: {
-          cyan: '#06B6D4',    // Cyan-500
-          teal: '#14B8A6',    // Teal-500
-          pink: '#EC4899',    // Pink-500
           emerald: '#10B981', // Emerald-500
+          teal: '#14B8A6',    // Teal-500
+          amber: '#F59E0B',   // Amber-500
         },
         dark: {
-          900: '#0F172A',     // Slate-900 (Deep Background)
-          800: '#1E293B',     // Slate-800 (Card Background)
-          700: '#334155',     // Slate-700 (Border)
+          900: '#0B1120',     // Deep background
+          800: '#141B2E',     // Card / surface background
+          700: '#293449',     // Border
         }
       },
       boxShadow: {
         card: '0 8px 32px rgba(0, 0, 0, 0.08)',
-        'card-hover': '0 12px 48px rgba(124, 58, 237, 0.15)',
-        glow: '0 0 20px rgba(139, 92, 246, 0.5)',
+        'card-hover': '0 12px 48px rgba(79, 70, 229, 0.15)',
+        glow: '0 0 20px rgba(99, 102, 241, 0.5)',
       },
       backgroundImage: {
         'hero-gradient': 'radial-gradient(ellipse at top, #1e1b4b, #0f172a)',

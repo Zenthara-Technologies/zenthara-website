@@ -90,7 +90,7 @@ export function Navbar() {
 
       {open && (
         <div className="container md:hidden">
-          <div className="mt-2 flex flex-col gap-1 rounded-2xl border border-white/40 bg-white/90 p-3 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-dark-900/95">
+          <div className="mt-2 flex flex-col gap-1 rounded-2xl border border-slate-200/80 bg-white/95 p-3 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-dark-900/95">
             <SectionLink id="home" href="/" className="rounded-lg px-3 py-2.5 font-medium text-slate-700 hover:bg-slate-900/5 dark:text-slate-200 dark:hover:bg-white/10" onNavigate={handleNavigate}>
               Home
             </SectionLink>

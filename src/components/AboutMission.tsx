@@ -83,7 +83,7 @@ export function AboutMission() {
               stay under one roof so nothing gets lost in translation.
             </p>
 
-            <div className="mt-5 rounded-2xl bg-white/60 dark:bg-dark-800/60 backdrop-blur-sm p-5 shadow-card ring-1 ring-white/20 dark:ring-white/10">
+            <div className="mt-5 rounded-2xl bg-white/90 dark:bg-dark-800/60 backdrop-blur-sm p-5 shadow-card ring-1 ring-slate-200/80 dark:ring-white/10">
               <h3 className="font-semibold text-slate-900 dark:text-white">Our Mission</h3>
               <p className="mt-1 text-slate-600 dark:text-slate-400">
                 To democratize access to cutting-edge technology by delivering reliable, world-class solutions that drive innovation, efficiency, and sustainable growth for every client we serve.
@@ -94,7 +94,7 @@ export function AboutMission() {
               {FEATURES.map((feature, index) => (
                 <div
                   key={feature.title}
-                  className="flex items-center gap-3 rounded-2xl bg-white/60 dark:bg-dark-800/60 p-4 shadow-sm ring-1 ring-white/20 dark:ring-white/10 tile-hover-soft animate-fade-up backdrop-blur-sm"
+                  className="flex items-center gap-3 rounded-2xl bg-white/90 dark:bg-dark-800/60 p-4 shadow-sm ring-1 ring-slate-200/80 dark:ring-white/10 tile-hover-soft animate-fade-up backdrop-blur-sm"
                   style={{ animationDelay: `${index * 80}ms` }}
                 >
                   <div className={`flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br ${feature.accent} text-xl`}>
