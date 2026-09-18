@@ -48,8 +48,8 @@ export function Footer() {
       <div className="container footer-bottom">
         <span>© <span id="year">{new Date().getFullYear()}</span> Zenthara. All rights reserved.</span>
         <div className="footer-links flex gap-4">
-          <span className="cursor-default opacity-70">Privacy</span>
-          <span className="cursor-default opacity-70">Terms</span>
+          <Link href="/privacy" className="hover:text-brand-light transition-colors">Privacy</Link>
+          <Link href="/terms" className="hover:text-brand-light transition-colors">Terms</Link>
         </div>
       </div>
     </footer>
