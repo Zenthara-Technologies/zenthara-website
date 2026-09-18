@@ -9,7 +9,13 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: Props) {
   const post = posts.find((p) => p.slug === params.slug);
-  return { title: post ? `${post.title} — Zenthara` : 'Post — Zenthara' };
+  if (!post) return { title: 'Post not found' };
+  return {
+    title: post.title,
+    description: post.excerpt,
+    alternates: { canonical: `/blog/${post.slug}` },
+    openGraph: { title: post.title, description: post.excerpt, type: 'article', publishedTime: post.date },
+  };
 }
 
 export default function PostPage({ params }: Props) {

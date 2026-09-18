@@ -17,6 +17,10 @@ body {
   /* height: 100%; - Removed to fix scroll anchoring */
 }
 
+body.has-cookie-banner {
+  padding-bottom: var(--cookie-banner-height, 96px);
+}
+
 body {
   @apply bg-slate-50 text-slate-900 antialiased relative overflow-x-hidden transition-colors duration-300;
   background-image:
@@ -456,6 +460,29 @@ html {
   .contact-veil {
     animation: none !important;
     opacity: 0.2;
+  }
+}
+
+/* Animated, blurred, blended blobs are expensive to keep compositing on
+   mobile GPUs — they run continuously even off-screen and make scrolling
+   feel sluggish. Freeze them (keep the static gradient) below the lg
+   breakpoint, where they're decorative rather than a focal effect. */
+@media (max-width: 1023px) {
+
+  .mission-blob,
+  .process-veil,
+  .contact-veil,
+  body::before,
+  body::after {
+    animation: none !important;
+  }
+
+  /* The header is `position: fixed` and stays on screen through every
+     scroll frame, so a large backdrop-blur on it forces the browser to
+     recompute the blur continuously while scrolling. Cheaper on mobile. */
+  .site-header-inner {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 }
 

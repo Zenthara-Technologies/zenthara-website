@@ -2,7 +2,11 @@ import { cases } from '@/content/case-studies';
 import { PortfolioGrid } from '@/components/PortfolioGrid';
 import { ContactButton } from '@/components/ContactButton';
 
-export const metadata = { title: 'Portfolio — Zenthara' };
+export const metadata = {
+  title: 'Portfolio',
+  description: 'Selected case studies from Zenthara — cloud migrations, identity platforms, real-time systems, and automation delivered for real clients.',
+  alternates: { canonical: '/portfolio' },
+};
 
 export default function PortfolioPage() {
   return (

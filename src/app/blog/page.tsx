@@ -1,7 +1,11 @@
 import Link from 'next/link';
 import { posts } from '@/content/posts';
 
-export const metadata = { title: 'Blog — Zenthara' };
+export const metadata = {
+  title: 'Blog',
+  description: 'Insights on web, cloud, and data engineering from the Zenthara team.',
+  alternates: { canonical: '/blog' },
+};
 
 export default function BlogIndexPage() {
   return (

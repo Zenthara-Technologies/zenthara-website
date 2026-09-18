@@ -10,7 +10,13 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: Props) {
   const c = cases.find((x) => x.slug === params.slug);
-  return { title: c ? `${c.title} — Zenthara` : 'Case Study — Zenthara' };
+  if (!c) return { title: 'Case study not found' };
+  return {
+    title: c.title,
+    description: c.excerpt,
+    alternates: { canonical: `/portfolio/${c.slug}` },
+    openGraph: { title: c.title, description: c.excerpt, type: 'article' },
+  };
 }
 
 export default function CaseStudyPage({ params }: Props) {
