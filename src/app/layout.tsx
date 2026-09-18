@@ -8,10 +8,31 @@ import { ContactModalProvider } from '@/components/ContactModal';
 import { THEME_INIT_SCRIPT } from '@/components/ThemeToggle';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { HashScrollCleanup } from '@/components/HashScrollCleanup';
+import { CookieConsent } from '@/components/CookieConsent';
+
+const SITE_URL = 'https://zentharatechnologies.com';
+const SITE_NAME = 'Zenthara';
+const SITE_DESCRIPTION = 'Zenthara is a product engineering partner that builds scalable web, cloud, and AI-powered solutions for teams who need to move fast without cutting corners.';
 
 export const metadata: Metadata = {
-  title: 'Zenthara - We build. We deliver.',
-  description: 'Zenthara builds scalable web, cloud, and data solutions.'
+  metadataBase: new URL(SITE_URL),
+  title: { default: 'Zenthara - We build. We deliver.', template: `%s — ${SITE_NAME}` },
+  description: SITE_DESCRIPTION,
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: 'Zenthara - We build. We deliver.',
+    description: SITE_DESCRIPTION,
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Zenthara — product engineering partner' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Zenthara - We build. We deliver.',
+    description: SITE_DESCRIPTION,
+    images: ['/og-image.png'],
+  },
 };
 
 const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-jakarta' });
@@ -28,6 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="flex-1 pt-20">{children}</main>
         <Footer />
         <ContactModalProvider />
+        <CookieConsent />
         <ScrollReveal />
         <Suspense fallback={null}>
           <HashScrollCleanup />

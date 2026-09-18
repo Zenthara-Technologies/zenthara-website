@@ -1,4 +1,8 @@
-export const metadata = { title: 'About - Zenthara' };
+export const metadata = {
+  title: 'About',
+  description: 'Zenthara is a small, senior product engineering team turning vision into high-performance software — from cloud architecture to AI-powered features.',
+  alternates: { canonical: '/about' },
+};
 
 export default function AboutPage() {
   const values = [

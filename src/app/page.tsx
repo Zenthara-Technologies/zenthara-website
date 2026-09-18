@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/Button';
 import { ContactButton } from '@/components/ContactButton';
@@ -9,6 +10,10 @@ import { AboutMission } from '@/components/AboutMission';
 import { ContactInfoSection } from '@/components/ContactInfoSection';
 import { CaseStudyCard } from '@/components/CaseStudyCard';
 import { cases } from '@/content/case-studies';
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+};
 
 const FEATURED_SLUGS = ['real-time-patient-monitoring', 'licensing-platform', 'account-portal-rebuild'];
 const featuredCases = FEATURED_SLUGS.map((slug) => cases.find((c) => c.slug === slug)).filter((c): c is NonNullable<typeof c> => Boolean(c));
